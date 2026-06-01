@@ -37,8 +37,7 @@ export function FeaturesSection() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            ボーイスカウトは、世界174の国と地域で展開される世界最大の青少年教育運動です。<br class="hidden md:block">
-                その核心にある教育理念と、子どもたちが手にする確かな成長の軌跡をご紹介します。
+            ボーイスカウトは、世界174の国と地域で展開される世界最大の青少年教育運動です。
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             ボーイスカウトの目的は、青少年がその自発性を大切にしながら、グループでの活動や野外での体験を通じて、「自立した良き市民」として成長することを助けることにあります。
