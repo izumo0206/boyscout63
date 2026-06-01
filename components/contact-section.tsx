@@ -3,201 +3,155 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Send, CheckCircle2 } from "lucide-react"
-
-const inquiryTypes = [
-  "入団希望",
-  "体験入隊希望",
-  "見学希望",
-  "その他のお問い合わせ",
-]
-
-const grades = [
-  "年長",
-  "小学1年生",
-  "小学2年生",
-  "小学3年生",
-  "小学4年生",
-  "小学5年生",
-  "小学6年生",
-  "中学1年生",
-  "中学2年生",
-  "中学3年生",
-  "高校1年生",
-  "高校2年生",
-  "高校3年生",
-]
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { CheckCircle2 } from "lucide-react"
 
 export function ContactSection() {
-  const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // 実際にお問い合わせを受け取るために、FormspreeなどのエンドポイントURLを設定してください。
+  // 例: "https://formspree.io/f/your_form_id"
+  const FORM_ENDPOINT = "https://formspree.io/f/xredwkna" // ★ここに取得したURLを入れます
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // Demo: just show success state
-    setSubmitted(true)
+    
+    // エンドポイントが設定されていない場合は、デモとして成功画面を表示する（元の挙動）
+    if (!FORM_ENDPOINT) {
+      setIsSubmitted(true)
+      return
+    }
+
+    setIsSubmitting(true)
+    setError(null)
+
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      })
+
+      if (response.ok) {
+        setIsSubmitted(true)
+        form.reset()
+      } else {
+        const data = await response.json()
+        if (Object.hasOwn(data, 'errors')) {
+          setError(data.errors.map((err: any) => err.message).join(", "))
+        } else {
+          setError("送信に失敗しました。後でもう一度お試しください。")
+        }
+      }
+    } catch (err) {
+      setError("ネットワークエラーが発生しました。通信環境をご確認ください。")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
-  if (submitted) {
+  if (isSubmitted) {
     return (
-      <section id="contact" className="py-20 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="w-20 h-20 rounded-full bg-secondary mx-auto mb-6 flex items-center justify-center">
-              <CheckCircle2 className="h-10 w-10 text-secondary-foreground" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              お問い合わせありがとうございます！
-            </h2>
-            <p className="text-lg opacity-90 mb-6">
-              ご入力いただいた内容を確認後、
-              <br />
-              団委員または担当リーダーより折り返しご連絡いたします。
-            </p>
-            <Button
-              variant="secondary"
-              onClick={() => setSubmitted(false)}
-              className="px-8"
-            >
-              別の問い合わせをする
-            </Button>
+      <section id="contact" className="py-16 md:py-24 bg-green-50">
+        <div className="container px-4 md:px-6 max-w-3xl mx-auto text-center">
+          <div className="flex justify-center mb-6">
+            <CheckCircle2 className="h-16 w-16 text-green-600" />
           </div>
+          <h2 className="text-3xl font-bold tracking-tight text-green-900 mb-4">お問い合わせありがとうございます</h2>
+          <p className="text-green-800 mb-8 text-lg">
+            内容を確認の上、担当者より通常2〜3日以内にご連絡いたします。
+          </p>
+          <Button
+            onClick={() => setIsSubmitted(false)}
+            variant="outline"
+            className="border-green-600 text-green-700 hover:bg-green-100"
+          >
+            新しく問い合わせる
+          </Button>
         </div>
       </section>
     )
   }
 
   return (
-    <section id="contact" className="py-20 bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-16 md:py-24 bg-green-50">
+      <div className="container px-4 md:px-6 max-w-3xl mx-auto">
         <div className="text-center mb-12">
-          <span className="inline-block bg-secondary text-secondary-foreground px-4 py-2 rounded-full text-sm font-semibold mb-4">
-            見学・体験 受付中
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            お問い合わせ
-          </h2>
-          <p className="opacity-90 max-w-2xl mx-auto">
-            見学・体験入隊のお申し込み、入団に関するご質問など、
-            <br />
-            お気軽にお問い合わせください。
+          <h2 className="text-3xl font-bold tracking-tight text-green-900 sm:text-4xl mb-4">見学・お問い合わせ</h2>
+          <p className="text-green-800 text-lg">
+            活動の見学や体験は随時受け付けています。お気軽にご連絡ください。
           </p>
         </div>
 
-        <Card className="max-w-2xl mx-auto">
-          <CardHeader>
-            <CardTitle className="text-center text-foreground">お問い合わせフォーム</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-green-100">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {error && (
+              <div className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg">
+                {error}
+              </div>
+            )}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="inquiryType" className="text-foreground">お問い合わせ種別 *</Label>
-                <Select required>
-                  <SelectTrigger className="bg-background">
+                <Label htmlFor="name">保護者のお名前 <span className="text-red-500">*</span></Label>
+                <Input id="name" name="name" placeholder="山田 太郎" required className="border-green-200 focus-visible:ring-green-500" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">メールアドレス <span className="text-red-500">*</span></Label>
+                <Input id="email" name="email" type="email" placeholder="taro@example.com" required className="border-green-200 focus-visible:ring-green-500" />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="childAge">お子様の年齢・学年</Label>
+                <Input id="childAge" name="childAge" placeholder="小学3年生" className="border-green-200 focus-visible:ring-green-500" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="inquiryType">お問い合わせ種類 <span className="text-red-500">*</span></Label>
+                <Select name="inquiryType" required defaultValue="tour">
+                  <SelectTrigger className="border-green-200 focus-visible:ring-green-500">
                     <SelectValue placeholder="選択してください" />
                   </SelectTrigger>
                   <SelectContent>
-                    {inquiryTypes.map((type) => (
-                      <SelectItem key={type} value={type}>
-                        {type}
-                      </SelectItem>
-                    ))}
+                    <SelectItem value="tour">見学・体験の申し込み</SelectItem>
+                    <SelectItem value="join">入隊について</SelectItem>
+                    <SelectItem value="question">活動内容への質問</SelectItem>
+                    <SelectItem value="other">その他</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
+            </div>
 
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="parentName" className="text-foreground">保護者氏名 *</Label>
-                  <Input
-                    id="parentName"
-                    placeholder="山田 太郎"
-                    required
-                    className="bg-background"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="childName" className="text-foreground">お子様の名前 *</Label>
-                  <Input
-                    id="childName"
-                    placeholder="山田 花子（やまだ はなこ）"
-                    required
-                    className="bg-background"
-                  />
-                </div>
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="message">お問い合わせ内容 <span className="text-red-500">*</span></Label>
+              <Textarea
+                id="message"
+                name="message"
+                placeholder="見学希望日や、気になることなどをご自由にお書きください。"
+                rows={5}
+                required
+                className="border-green-200 focus-visible:ring-green-500 resize-none"
+              />
+            </div>
 
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="school" className="text-foreground">学校名</Label>
-                  <Input
-                    id="school"
-                    placeholder="○○小学校"
-                    className="bg-background"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="childGrade" className="text-foreground">お子様の学年 *</Label>
-                  <Select required>
-                    <SelectTrigger className="bg-background">
-                      <SelectValue placeholder="選択してください" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {grades.map((grade) => (
-                        <SelectItem key={grade} value={grade}>
-                          {grade}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-foreground">メールアドレス *</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="example@email.com"
-                  required
-                  className="bg-background"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="message" className="text-foreground">お問い合わせ内容</Label>
-                <Textarea
-                  id="message"
-                  placeholder="ご質問やご要望がありましたらお書きください"
-                  rows={4}
-                  className="bg-background"
-                />
-              </div>
-
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground"
-              >
-                <Send className="h-5 w-5 mr-2" />
-                送信する
-              </Button>
-
-              <p className="text-xs text-center text-muted-foreground">
-                ※ 送信後、担当者より折り返しご連絡いたします。
-              </p>
-            </form>
-          </CardContent>
-        </Card>
+            <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white text-lg py-6" disabled={isSubmitting}>
+              {isSubmitting ? "送信中..." : "送信する"}
+            </Button>
+            
+            <p className="text-xs text-center text-gray-500 mt-4">
+              ご入力いただいた個人情報は、お問い合わせ対応のみに使用いたします。
+            </p>
+          </form>
+        </div>
       </div>
     </section>
   )
