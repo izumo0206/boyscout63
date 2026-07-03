@@ -5,11 +5,11 @@ export function SNSSection() {
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <div className="mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             最近の活動
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl">
             Instagramで活動の様子を公開しています。
             <br />
             どんな雰囲気の活動なのか、ぜひご覧ください。
@@ -18,16 +18,16 @@ export function SNSSection() {
 
         <div className="max-w-2xl mx-auto">
           {/* Instagram Card */}
-          <div className="bg-card rounded-2xl p-8 border border-border text-center">
-            <div className="flex items-center justify-center gap-2 mb-6">
+          <div className="bg-card rounded-2xl p-8 border border-border">
+            <div className="flex items-center justify-start gap-2 mb-6">
               <Instagram className="h-8 w-8 text-pink-500" />
               <h3 className="text-2xl font-bold text-foreground">@bs_osaka63</h3>
             </div>
             
             <div className="aspect-video bg-muted rounded-xl mb-6 overflow-hidden">
               <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400">
-                <div className="text-center text-white">
-                  <Instagram className="h-16 w-16 mx-auto mb-4" />
+                <div className="text-white">
+                  <Instagram className="h-16 w-16 mb-4" />
                   <p className="text-lg font-medium">活動写真を公開中！</p>
                 </div>
               </div>

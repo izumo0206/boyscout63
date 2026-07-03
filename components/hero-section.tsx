@@ -29,26 +29,24 @@ export function HeroSection() {
         </div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-20 text-center">
+      <div className="relative z-10 container mx-auto px-4 py-20 text-left">
         <div className="mb-6">
           <span className="inline-block bg-secondary text-secondary-foreground px-4 py-2 rounded-full text-sm font-semibold">
-            ビーバースカウト隊 再結隊！体験入隊 受付中
+            ビーバースカウト隊 体験入隊受付中
           </span>
         </div>
 
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-          <span className="text-secondary">ボーイスカウト</span>
-          <br className="hidden md:block" />
-          大阪第63団
+        <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight whitespace-nowrap">
+          日本ボーイスカウト大阪第63団
         </h1>
 
-        <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10 opacity-90 leading-relaxed">
-          大阪市生野区・平野区を中心に活動
+        <p className="text-lg md:text-xl max-w-2xl mb-10 opacity-90 leading-relaxed">
+          大阪市生野区・平野区を中心に活動しています。
           <br className="hidden md:block" />
           自然の中で「考える力」「協力する心」「挑戦する勇気」を育てます
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-start items-start sm:items-center">
           <Button
             size="lg"
             className="bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8 py-6 text-lg rounded-full shadow-lg"

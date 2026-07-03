@@ -18,9 +18,14 @@ const steps = [
     description: "実際の活動に参加して雰囲気を体験いただけます",
     icon: ClipboardList,
     details: [
-      "随時受け付けています",
-      "学年や時期を問わず参加可能",
-      "服装：動きやすい服装でお越しください",
+      "随時受け付けております。お気軽にご参加ください。",
+      "就学直前の1月以降であれば、年齢や時期は問いません。",
+      "先ずは体験入隊で活動の雰囲気に慣れて、隊員たちと仲良くなりましょう。",
+      "当日の服装や必要な持ち物等は、隊長からご案内差しあげます。",
+      "活動内容に応じ費用が発生した場合は、当日実費のご負担をお願いします。",
+      "体験入隊でのご参加は3回までとし、原則保護者同伴をお願いしています。",
+      "是非お友達もご一緒にご参加ください。",
+      "なお、活動時の保険等は年間を通じて加入しており、体験入隊時は対象外となりますので、ご自身で傷害保険等へのご加入をご検討ください。",
     ],
   },
   {
@@ -40,11 +45,11 @@ export function FlowSection() {
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             入団までの流れ
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl">
             見学・体験入隊は随時受け付けています。お気軽にお問い合わせください。
           </p>
         </div>

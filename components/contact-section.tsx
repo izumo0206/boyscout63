@@ -62,8 +62,8 @@ export function ContactSection() {
   if (isSubmitted) {
     return (
       <section id="contact" className="py-16 md:py-24 bg-green-50">
-        <div className="container px-4 md:px-6 max-w-3xl mx-auto text-center">
-          <div className="flex justify-center mb-6">
+        <div className="container px-4 md:px-6 max-w-3xl mx-auto">
+          <div className="flex justify-start mb-6">
             <CheckCircle2 className="h-16 w-16 text-green-600" />
           </div>
           <h2 className="text-3xl font-bold tracking-tight text-green-900 mb-4">お問い合わせありがとうございます</h2>
@@ -85,7 +85,7 @@ export function ContactSection() {
   return (
     <section id="contact" className="py-16 md:py-24 bg-green-50">
       <div className="container px-4 md:px-6 max-w-3xl mx-auto">
-        <div className="text-center mb-12">
+        <div className="mb-12">
           <h2 className="text-3xl font-bold tracking-tight text-green-900 sm:text-4xl mb-4">見学・お問い合わせ</h2>
           <p className="text-green-800 text-lg">
             活動の見学や体験は随時受け付けています。お気軽にご連絡ください。
@@ -147,7 +147,7 @@ export function ContactSection() {
               {isSubmitting ? "送信中..." : "送信する"}
             </Button>
             
-            <p className="text-xs text-center text-gray-500 mt-4">
+            <p className="text-xs text-gray-500 mt-4">
               ご入力いただいた個人情報は、お問い合わせ対応のみに使用いたします。
             </p>
           </form>

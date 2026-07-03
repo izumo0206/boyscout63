@@ -9,7 +9,7 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Compass className="h-8 w-8 text-secondary" />
-              <span className="text-2xl font-bold">ボーイスカウト大阪第63団</span>
+              <span className="text-2xl font-bold">日本ボーイスカウト大阪第63団</span>
             </div>
             <p className="text-sm opacity-80 leading-relaxed">
               大阪市生野区・平野区を中心に活動するボーイスカウト団です。
@@ -57,9 +57,9 @@ export function Footer() {
         <div className="border-t border-background/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm opacity-60">
-              &copy; 2023 ボーイスカウト大阪第63団
+              &copy; 2023 日本ボーイスカウト大阪第63団
             </p>
-            <div className="text-sm opacity-60 text-center md:text-right">
+            <div className="text-sm opacity-60">
               <p>
                 このホームページ上のスカウト運動に関する事項は、
                 <br className="md:hidden" />

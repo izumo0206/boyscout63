@@ -7,8 +7,8 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'ボーイスカウト大阪第63団 | 大阪市生野区・平野区で活動',
-  description: 'ボーイスカウト大阪第63団は、大阪市生野区・平野区を中心に活動するボーイスカウト団です。ビーバースカウト隊再結隊、体験入隊受付中！',
+  title: '日本ボーイスカウト大阪第63団 | 大阪市生野区・平野区で活動',
+  description: '日本ボーイスカウト大阪第63団は、大阪市生野区・平野区を中心に活動するボーイスカウト団です。ビーバースカウト隊の体験入隊を受け付けています。',
   generator: 'v0.app',
   icons: {
     icon: [
