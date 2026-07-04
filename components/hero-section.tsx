@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { TreePine, Tent, Users, ChevronDown, Star } from "lucide-react"
+import { TreePine, Tent, Users, ChevronDown, Star, Megaphone } from "lucide-react"
 
 export function HeroSection() {
   const scrollToTroops = () => {
@@ -31,7 +31,12 @@ export function HeroSection() {
 
       <div className="relative z-10 container mx-auto px-4 py-20 text-left">
         <div className="mb-6">
-          <span className="inline-block bg-secondary text-secondary-foreground px-4 py-2 rounded-full text-sm font-semibold">
+          <span className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/50 text-primary-foreground px-4 py-2 rounded-full text-sm font-medium">
+            <span className="relative flex h-2.5 w-2.5 flex-shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary" />
+            </span>
+            <Megaphone className="h-3.5 w-3.5 flex-shrink-0" />
             ビーバースカウト隊 体験入隊受付中
           </span>
         </div>
@@ -55,9 +60,8 @@ export function HeroSection() {
             体験入隊に申し込む
           </Button>
           <Button
-            variant="outline"
             size="lg"
-            className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 px-8 py-6 text-lg rounded-full"
+            className="bg-white text-primary hover:bg-white/90 px-8 py-6 text-lg rounded-full shadow-md"
             onClick={scrollToTroops}
           >
             各隊の紹介を見る
